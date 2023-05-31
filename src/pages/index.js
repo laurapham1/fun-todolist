@@ -59,13 +59,13 @@ const IndexPage = () => {
 	};
 
 	return (
-		<main className='flex justify-center flex-col items-center gap-2 font-mono p-10 h-full'>
+		<main className='flex justify-center flex-col items-center gap-2 p-10 h-full font-light'>
 			<div
 				id='todo-list'
 				className='bg-white rounded-2xl rounded-t-0 p-6 shadow-lg gap-4 flex flex-col absolute max-h-[80vh] top-[10vh] max-w-[80vw] min-w-[50vw]'
 			>
 				<div className='z-10 text-center'>
-					<h1 className='text-2xl font-bold mb-2'>Daily To Do List</h1>
+					<h1 className='text-2xl font-light mb-2'>Daily To Do List</h1>
 					<p className='text-sm'>
 						{totalCompleted}/{todos.length} ✅
 					</p>
@@ -80,7 +80,7 @@ const IndexPage = () => {
 										id={todo.id}
 										name='todo'
 										value={todo.title}
-										className='peer checked:bg-blue-[#23a6d5]'
+										className='peer checked:bg-blue-500'
 										checked={todo.complete}
 										onChange={handleCheckedTodo}
 									/>
@@ -92,7 +92,7 @@ const IndexPage = () => {
 									</label>
 								</div>
 								<div
-									className='cursor-pointer'
+									className='cursor-pointer flex items-center'
 									onClick={() => handleDeleteTodo(todo.id)}
 								>
 									<FaRegTrashAlt />
@@ -102,8 +102,8 @@ const IndexPage = () => {
 					})}
 				</div>
 				<input
-					class='placeholder:text-slate-400 block bg-white w-full border rounded-md p-2 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm text-center'
-					placeholder='Go for a run'
+					class='placeholder:text-slate-400 block bg-white w-full border rounded-md p-2 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-md text-center'
+					placeholder='Go for a run 🏃🏻‍♀️'
 					type='text'
 					name='add-todo'
 					onKeyUp={handleSubmitToDo}
