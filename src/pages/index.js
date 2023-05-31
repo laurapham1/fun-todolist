@@ -67,20 +67,20 @@ const IndexPage = () => {
 
 	return (
 		<main className='flex justify-center flex-col items-center gap-2 font-mono p-10 h-full'>
-			<div className='z-10'>
-				<h1 className='text-2xl font-bold mb-2'>Daily To Do List</h1>
-				<p className='text-sm text-center'>
-					{totalCompleted}/{todos.length} ✅
-				</p>
-			</div>
 			<div
 				id='todo-list'
-				className='bg-white rounded border p-6 shadow-lg gap-4 flex flex-col absolute h-[100vh] top-0 max-w-[80vw] min-w-[50vw]'
+				className='bg-white rounded-2xl rounded-t-0 p-6 shadow-lg gap-4 flex flex-col absolute max-h-[80vh] top-[10vh] max-w-[80vw] min-w-[50vw]'
 			>
-				<div id='todos' className='mt-[80px] overflow-auto'>
+				<div className='z-10 text-center'>
+					<h1 className='text-2xl font-bold mb-2'>Daily To Do List</h1>
+					<p className='text-sm'>
+						{totalCompleted}/{todos.length} ✅
+					</p>
+				</div>
+				<div id='todos' className='overflow-auto'>
 					{todos.map((todo, index) => {
 						return (
-							<div className='flex gap-4 p-4 px-10 border-b last:border-b-0'>
+							<div className='flex gap-4 p-4 px-2 border-b last:border-b-0'>
 								<input
 									type='checkbox'
 									id={todo.id}
