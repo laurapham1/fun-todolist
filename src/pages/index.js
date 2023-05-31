@@ -1,31 +1,16 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { FaRegTrashAlt } from 'react-icons/fa';
-const defaultTodos = [
-	{
-		id: 1,
-		title: 'Walk Lunar',
-		complete: false,
-	},
-	{
-		id: 2,
-		title: 'Eat Breakfast',
-		complete: false,
-	},
-	{
-		id: 3,
-		title: 'Learn Japanese',
-		complete: false,
-	},
-];
 
 const IndexPage = () => {
 	const [todos, setToDos] = useState([]);
 	const [totalCompleted, setTotalCompleted] = useState(0);
 	useEffect(() => {
-		// if no todos in local storage, set default to dos
-		setToDos(defaultTodos);
-		// else use local storage todos
+		// if todos in local storage, set to dos
+		if (localStorage.getItem('todos')) {
+			const storedTodos = JSON.parse(localStorage.getItem('todos'));
+			setToDos(storedTodos);
+		}
 	}, []);
 
 	console.log({ todos, totalCompleted });
@@ -47,6 +32,7 @@ const IndexPage = () => {
 			complete: false,
 		};
 		setToDos([...todos, newToDo]);
+		localStorage.setItem('todos', JSON.stringify([...todos, newToDo]));
 		e.target.value = '';
 	};
 
@@ -63,11 +49,13 @@ const IndexPage = () => {
 			complete: !updatedTodo.complete,
 		};
 		setToDos([...todos]);
+		localStorage.setItem('todos', JSON.stringify([...todos]));
 	};
 
 	const handleDeleteTodo = (id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
 		setToDos(newTodos);
+		localStorage.setItem('todos', JSON.stringify(newTodos));
 	};
 
 	return (
