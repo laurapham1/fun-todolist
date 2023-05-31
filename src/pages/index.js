@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-
+import { FaRegTrashAlt } from 'react-icons/fa';
 const defaultTodos = [
 	{
 		id: 1,
@@ -65,6 +65,11 @@ const IndexPage = () => {
 		setToDos([...todos]);
 	};
 
+	const handleDeleteTodo = (id) => {
+		const newTodos = todos.filter((todo) => todo.id !== id);
+		setToDos(newTodos);
+	};
+
 	return (
 		<main className='flex justify-center flex-col items-center gap-2 font-mono p-10 h-full'>
 			<div
@@ -77,22 +82,33 @@ const IndexPage = () => {
 						{totalCompleted}/{todos.length} ✅
 					</p>
 				</div>
-				<div id='todos' className='overflow-auto'>
+				<div id='todos' className='overflow-y-auto overflow-x-hidden px-4'>
 					{todos.map((todo, index) => {
 						return (
-							<div className='flex gap-4 p-4 px-2 border-b last:border-b-0'>
-								<input
-									type='checkbox'
-									id={todo.id}
-									name='todo'
-									value={todo.title}
-									className='peer checked:bg-blue-[#23a6d5]'
-									checked={todo.complete}
-									onChange={handleCheckedTodo}
-								/>
-								<label for={todo.id} className='peer-checked:line-through '>
-									{todo.title}
-								</label>
+							<div className='flex gap-4 py-4 border-b last:border-b-0 justify-between'>
+								<div className='flex gap-4 min-w-0'>
+									<input
+										type='checkbox'
+										id={todo.id}
+										name='todo'
+										value={todo.title}
+										className='peer checked:bg-blue-[#23a6d5]'
+										checked={todo.complete}
+										onChange={handleCheckedTodo}
+									/>
+									<label
+										for={todo.id}
+										className='peer-checked:line-through text-ellipsis overflow-hidden hover:overflow'
+									>
+										{todo.title}
+									</label>
+								</div>
+								<div
+									className='cursor-pointer'
+									onClick={() => handleDeleteTodo(todo.id)}
+								>
+									<FaRegTrashAlt />
+								</div>
 							</div>
 						);
 					})}
