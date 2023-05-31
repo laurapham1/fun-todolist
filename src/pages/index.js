@@ -13,8 +13,6 @@ const IndexPage = () => {
 		}
 	}, []);
 
-	console.log({ todos, totalCompleted });
-
 	useEffect(() => {
 		const totalCompleted = todos.reduce(
 			(acc, curr) => (curr.complete ? acc + 1 : acc),
@@ -36,7 +34,7 @@ const IndexPage = () => {
 		e.target.value = '';
 	};
 
-	const handleCheckedTodo = (e) => {
+	const handleCheckTodo = (e) => {
 		e.preventDefault();
 		const updatedTodoIndex = todos.findIndex(
 			(todo) => todo.id === parseInt(e.target.id, 10)
@@ -74,29 +72,30 @@ const IndexPage = () => {
 					{todos.map((todo, index) => {
 						return (
 							<div className='flex gap-4 py-4 border-b last:border-b-0 justify-between'>
-								<div className='flex gap-4 min-w-0 w-full'>
+								<div className='flex gap-4 min-w-0 w-full items-center'>
 									<input
 										type='checkbox'
 										id={todo.id}
 										name='todo'
 										value={todo.title}
-										className='peer checked:bg-blue-500 cursor-pointer'
+										className='peer checked:bg-blue-500 cursor-pointer h-fit'
 										checked={todo.complete}
-										onChange={handleCheckedTodo}
+										onChange={handleCheckTodo}
+										onKeyDown={(e) => e.code === 'Enter' && handleCheckTodo(e)}
 									/>
 									<label
 										for={todo.id}
-										className='peer-checked:line-through text-ellipsis overflow-hidden hover:overflow cursor-pointer'
+										className='peer-checked:line-through text-ellipsis overflow-hidden hover:overflow cursor-pointer w-full'
 									>
 										{todo.title}
 									</label>
 								</div>
-								<div
+								<button
 									className='cursor-pointer flex items-center'
 									onClick={() => handleDeleteTodo(todo.id)}
 								>
 									<FaRegTrashAlt />
-								</div>
+								</button>
 							</div>
 						);
 					})}
