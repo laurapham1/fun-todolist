@@ -80,13 +80,13 @@ const IndexPage = () => {
 										id={todo.id}
 										name='todo'
 										value={todo.title}
-										className='peer checked:bg-blue-500'
+										className='peer checked:bg-blue-500 cursor-pointer'
 										checked={todo.complete}
 										onChange={handleCheckedTodo}
 									/>
 									<label
 										for={todo.id}
-										className='peer-checked:line-through text-ellipsis overflow-hidden hover:overflow'
+										className='peer-checked:line-through text-ellipsis overflow-hidden hover:overflow cursor-pointer'
 									>
 										{todo.title}
 									</label>
