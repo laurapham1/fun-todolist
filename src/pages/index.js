@@ -5,12 +5,14 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 const IndexPage = () => {
 	const [todos, setToDos] = useState([]);
 	const [totalCompleted, setTotalCompleted] = useState(0);
+	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		// if todos in local storage, set to dos
 		if (localStorage.getItem('todos')) {
 			const storedTodos = JSON.parse(localStorage.getItem('todos'));
 			setToDos(storedTodos);
 		}
+		setIsLoading(false);
 	}, []);
 
 	useEffect(() => {
@@ -56,6 +58,13 @@ const IndexPage = () => {
 		localStorage.setItem('todos', JSON.stringify(newTodos));
 	};
 
+	if (isLoading) {
+		return (
+			<main className='flex items-center justify-center flex-col gap-4 m-4 text-lg h-screen'>
+				<div class='loader'></div>
+			</main>
+		);
+	}
 	return (
 		<main className='flex justify-center flex-col items-center gap-2 p-10 h-full font-light'>
 			<div
