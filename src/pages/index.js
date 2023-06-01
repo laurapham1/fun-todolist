@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { FaRegTrashAlt, FaRegCheckCircle, FaUndo } from 'react-icons/fa';
+import {
+	FaRegTrashAlt,
+	FaRegCheckCircle,
+	FaUndo,
+	FaHandHoldingHeart,
+} from 'react-icons/fa';
 
 const IndexPage = () => {
 	const [todos, setToDos] = useState([]);
@@ -66,7 +71,7 @@ const IndexPage = () => {
 		);
 	}
 	return (
-		<main className='flex justify-center flex-col items-center gap-2 p-10 h-full font-light'>
+		<main className='flex justify-end flex-col items-center gap-2 p-6 font-light h-[100vh]'>
 			<div
 				id='todo-list'
 				className='bg-white rounded-2xl rounded-t-0 p-6 shadow-lg gap-4 flex flex-col absolute max-h-[80vh] top-[10vh] max-w-[80vw] min-w-[50vw] md:min-w-[30vw]'
@@ -129,6 +134,11 @@ const IndexPage = () => {
 					</div>
 				)}
 			</div>
+			<footer>
+				<span className='flex items-center gap-2'>
+					Made with <FaHandHoldingHeart /> by Laura P.
+				</span>
+			</footer>
 		</main>
 	);
 };
