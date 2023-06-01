@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { FaRegTrashAlt } from 'react-icons/fa';
+import { FaRegTrashAlt, FaRegCheckCircle, FaUndo } from 'react-icons/fa';
 
 const IndexPage = () => {
 	const [todos, setToDos] = useState([]);
@@ -21,6 +21,7 @@ const IndexPage = () => {
 			0
 		);
 		setTotalCompleted(totalCompleted);
+		localStorage.setItem('todos', JSON.stringify(todos));
 	}, [todos]);
 
 	const handleSubmitToDo = (e) => {
@@ -32,7 +33,6 @@ const IndexPage = () => {
 			complete: false,
 		};
 		setToDos([...todos, newToDo]);
-		localStorage.setItem('todos', JSON.stringify([...todos, newToDo]));
 		e.target.value = '';
 	};
 
@@ -49,14 +49,14 @@ const IndexPage = () => {
 			complete: !updatedTodo.complete,
 		};
 		setToDos([...todos]);
-		localStorage.setItem('todos', JSON.stringify([...todos]));
 	};
 
 	const handleDeleteTodo = (id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
 		setToDos(newTodos);
-		localStorage.setItem('todos', JSON.stringify(newTodos));
 	};
+
+	const handleClearTodo = () => setToDos([]);
 
 	if (isLoading) {
 		return (
@@ -72,10 +72,15 @@ const IndexPage = () => {
 				className='bg-white rounded-2xl rounded-t-0 p-6 shadow-lg gap-4 flex flex-col absolute max-h-[80vh] top-[10vh] max-w-[80vw] min-w-[50vw] md:min-w-[30vw]'
 			>
 				<div className='z-10 text-center'>
-					<h1 className='text-2xl font-light mb-2'>Daily To Do List</h1>
-					<p className='text-sm'>
-						{totalCompleted}/{todos.length} ✅
-					</p>
+					<div>
+						<h1 className='text-2xl font-light mb-2'>Daily To Do List</h1>
+					</div>
+					<div className='flex items-center justify-center gap-2'>
+						<p className='text-sm'>
+							{totalCompleted}/{todos.length}
+						</p>
+						<FaRegCheckCircle className='fill-green-600' />
+					</div>
 				</div>
 				<div id='todos' className='overflow-y-auto overflow-x-hidden px-4'>
 					{todos.map((todo, index) => {
@@ -116,6 +121,13 @@ const IndexPage = () => {
 					name='add-todo'
 					onKeyUp={handleSubmitToDo}
 				/>
+				{todos.length > 0 && (
+					<div className='flex justify-end'>
+						<button onClick={() => handleClearTodo()}>
+							<FaUndo className='text-sm' />
+						</button>
+					</div>
+				)}
 			</div>
 		</main>
 	);
