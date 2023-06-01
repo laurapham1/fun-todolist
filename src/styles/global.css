@@ -5,7 +5,7 @@
 body {
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
-	animation: gradient 30s ease infinite;
+	animation: gradient 60s ease infinite;
 	height: 100vh;
 }
 
@@ -23,7 +23,7 @@ body {
 
 .loader {
 	border: 16px solid #f3f3f3; /* Light grey */
-	border-top: 16px solid #3498db; /* Blue */
+	border-top: 16px solid #e73c7e; /* Blue */
 	border-radius: 50%;
 	width: 80px;
 	height: 80px;
