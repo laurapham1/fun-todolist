@@ -5,6 +5,8 @@ import {
 	FaRegCheckCircle,
 	FaUndo,
 	FaHandHoldingHeart,
+	FaCross,
+	FaTimes,
 } from 'react-icons/fa';
 
 const IndexPage = () => {
@@ -113,7 +115,7 @@ const IndexPage = () => {
 									className='cursor-pointer flex items-center'
 									onClick={() => handleDeleteTodo(todo.id)}
 								>
-									<FaRegTrashAlt />
+									<FaTimes className='text-gray-500 text-sm hover:bg-gray-100 rounded' />
 								</button>
 							</div>
 						);
@@ -128,8 +130,11 @@ const IndexPage = () => {
 				/>
 				{todos.length > 0 && (
 					<div className='flex justify-end'>
-						<button onClick={() => handleClearTodo()}>
-							<FaUndo className='text-sm' />
+						<button
+							onClick={() => handleClearTodo()}
+							className='p-2 py-1 rounded text-sm hover:bg-gray-100'
+						>
+							<p>clear all</p>
 						</button>
 					</div>
 				)}
