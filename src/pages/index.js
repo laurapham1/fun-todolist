@@ -33,7 +33,7 @@ const IndexPage = () => {
 		e.preventDefault();
 		if (e.keyCode !== 13 || !e.target.value) return;
 		const newToDo = {
-			id: todos.length + 1,
+			id: todos[todos.length - 1]?.id + 1 || 0,
 			title: e.target.value,
 			complete: false,
 		};
